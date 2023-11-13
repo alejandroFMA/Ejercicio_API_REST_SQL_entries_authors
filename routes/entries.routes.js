@@ -5,8 +5,8 @@ const entriesRouter = express.Router();
 
 entriesRouter.get('/', entriesController.getEntries);
 entriesRouter.post('/', entriesController.createEntry);
-entriesRouter.put('/', entriesController.updateEntry);
-entriesRouter.delete('/:id_entry', entriesController.deleteEntry);
+entriesRouter.put('/:title?', entriesController.updateEntry);
+entriesRouter.delete('/:title?', entriesController.deleteEntry);
 
 
 

@@ -18,10 +18,11 @@ const queries = {
     (SELECT id_author FROM authors WHERE email=$3),$4)`,
 
     updateEntry:` UPDATE entries
-    SET title = $1, content = $2, category = $3
-    WHERE title = $4`,
+    SET content = $2, category = $3, date=$4
+    WHERE title = $1`,
 
     deleteEntry: `DELETE FROM entries
-    WHERE id_entry=$1;`
+    WHERE title=$1;`
 }
+
 module.exports = queries;

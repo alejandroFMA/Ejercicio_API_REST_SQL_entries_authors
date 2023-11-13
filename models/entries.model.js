@@ -38,15 +38,15 @@ const createEntry = async (entry) => {
 
 
 // DELETE
-const deleteEntry = async (id_entry) => {
+const deleteEntry = async (title) => {
     let client, result;
     try {
         client = await pool.connect(); // Espera a abrir conexion
-        const data = await client.query(queries.deleteEntry,[id_entry])
+        const data = await client.query(queries.deleteEntry,[title])
         result = data.rowCount
-    } catch (err) {
-        console.log(err);
-        throw err;
+    } catch (error) {
+        console.log(error);
+        throw error;
     } finally {
         client.release();
     }
@@ -56,13 +56,13 @@ const deleteEntry = async (id_entry) => {
 //UPDATE
 
 const updateEntry = async (editEntry) => {
-    const { title, content,  category } = editEntry;
+    const { title, content,  category, date } = editEntry;
     let client, result;
   
     try {
       client = await pool.connect();
   
-      const data = await client.query(queries.updateEntry, [title, content, category ]);
+      const data = await client.query(queries.updateEntry, [title, content, category, date ]);
       result = data.rowCount;
     } catch (err) {
       console.log(err);

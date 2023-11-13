@@ -33,9 +33,10 @@ const createEntry = async (req, res) => {
 }
 
 const deleteEntry = async (req, res) => {
-    const { id_entry } = req.params; 
+    const title = req.params.title;
+    console.log(title) 
     try{
-    const response = await entry.deleteEntry(id_entry);
+    const response = await entry.deleteEntry(title);
     if(response > 0){
     res.status(200).json({
         "entry_deleted": response,
@@ -52,9 +53,9 @@ const deleteEntry = async (req, res) => {
 }
 
 const updateEntry = async (req, res) => {
-    const editEntry = req.body; // {title,content,email,category}
+    const editEntry = req.body; // {content,category, date}
     const response = await entry.updateEntry(editEntry);
-    res.status(201).json({
+    res.status(200).json({
         "entry": response,
         data: editEntry
     });

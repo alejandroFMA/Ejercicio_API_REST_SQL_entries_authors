@@ -9,9 +9,9 @@ const getAuthorsByEmail = async (email) => {
         client = await pool.connect(); // Espera a abrir conexion
         const data = await client.query(queries.getAuthorsByEmail, [email])
         result = data.rows
-    } catch (err) {
-        console.log(err);
-        throw err;
+    } catch (error) {
+        console.log(error);
+        throw error;
     } finally {
         client.release();
     }
@@ -25,8 +25,8 @@ const getAllAuthors = async () => {
         client = await pool.connect(); // Espera a abrir conexion
         const data = await client.query(queries.getAllAuthors)
         result = data.rows
-    } catch (err) {
-        console.log(err);
+    } catch (error) {
+        console.log(error);
         throw err;
     } finally {
         client.release();
@@ -42,25 +42,24 @@ const createAuthors = async (entry) => {
         client = await pool.connect(); // Espera a abrir conexion
         const data = await client.query(queries.createAuthors,[name, surname, email, image])
         result = data.rowCount
-    } catch (err) {
-        console.log(err);
-        throw err;
+    } catch (error) {
+        console.log(error);
+        throw error;
     } finally {
         client.release();
     }
     return result
 }
 
-// DELETE
-//UPDATE
-const deleteAuthors = async (id_author) => {
+
+const deleteAuthors = async (email) => {
     let client, result;
     try {
         client = await pool.connect(); // Espera a abrir conexion
-        const data = await client.query(queries.deleteAuthors,[id_author])
+        const data = await client.query(queries.deleteAuthors,[email])
         result = data.rowCount
-    } catch (err) {
-        console.log(err);
+    } catch (error) {
+        console.log(error);
         throw err;
     } finally {
         client.release();
@@ -69,17 +68,16 @@ const deleteAuthors = async (id_author) => {
 }
 
 const updateAuthors = async (editAuthors) => {
-    const { name, surname, email, image, id_author } = editAuthors;
-    let client, result;
-  
+    const { name, surname, image, email } = editAuthors;
+    let client, result; 
     try {
       client = await pool.connect();
   
-      const data = await client.query(queries.updateAuthors, [name, surname, email, image, id_author]);
+      const data = await client.query(queries.updateAuthors, [name, surname, image, email]);
       result = data.rowCount;
-    } catch (err) {
-      console.log(err);
-      throw err;
+    } catch (error) {
+      console.log(error);
+      throw error;
     } finally {
       client.release();
     }

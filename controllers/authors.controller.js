@@ -1,6 +1,5 @@
 const author= require("../models/authors.model")
 
-
 const getAuthors = async (req, res) => {
     let authors;
     if (req.query.email) {
@@ -13,7 +12,6 @@ const getAuthors = async (req, res) => {
 }
 
 
-
 const createAuthor = async (req, res) => {
     const newAuthor = req.body; // {title,content,email,category}
     const response = await author.createAuthors(newAuthor);
@@ -23,14 +21,13 @@ const createAuthor = async (req, res) => {
 }
 
 
-
 const deleteAuthor = async (req, res) => {
-    const { id_author } = req.params; 
+    const { email } = req.query; 
     try{
-    const response = await author.deleteAuthors(id_author);
+    const response = await author.deleteAuthors(email);
     if(response > 0){
     res.status(200).json({
-        message: `usuario creado: ${id_author.email}`
+        message: `usuario eliminado: ${email}`
         
     });
     }else{
@@ -44,11 +41,11 @@ const deleteAuthor = async (req, res) => {
 }
 
 const updateAuthor = async (req, res) => {
-    const updateAuthor = req.body; // {title,content,email,category}
+    const updateAuthor = req.body; 
     const response = await author.updateAuthors(updateAuthor);
-    res.status(200).json({
-        message: `usuario actualizado ${id_author.email}`
-    
+    res.status(200).json(    
+        {   author: response, 
+            message: `se ha actualizado ${updateAuthor.email}`
     });
 }
 
