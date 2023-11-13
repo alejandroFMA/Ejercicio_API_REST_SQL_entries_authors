@@ -19,8 +19,7 @@ const getAuthorsByEmail = async (email) => {
 }
 
 // GET
-const getAllAuthors = async () => {
-    let client, result;
+const getAllAuthors = async (client) => {
     try {
         client = await pool.connect(); // Espera a abrir conexion
         const data = await client.query(queries.getAllAuthors)
