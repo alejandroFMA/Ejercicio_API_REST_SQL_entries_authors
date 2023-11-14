@@ -15,8 +15,8 @@ app.use('/api/entries', entriesRoutes);
 app.use('/api/authors', authorsRoutes);
 
 
-// const error404 = require('./middleware/error404');
-// app.use('*', error404);
+const error404 = require('./middleware/error404');
+app.use('*', error404);
 
 
 app.listen(port, () => {
